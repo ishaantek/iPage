@@ -551,14 +551,14 @@ function signature(dom) {
 	const spans = dom.querySelectorAll('#rand span')
 	const hyper = dom.querySelectorAll('#rand a')
 	const us = [
-		{ href: 'https://victr.me/', name: 'Victor Azevedo' },
-		{ href: 'https://tahoe.be/', name: 'Tahoe Beetschen' },
+		{ href: 'https://twitter.com/allaboutishaan', name: 'Ishaan Garg' },
+		{ href: ' ', name: ' ' },
 	]
 
 	if (Math.random() > 0.5) us.reverse()
 
 	spans[0].textContent = `${tradThis('by')} `
-	spans[1].textContent = ` & `
+	spans[1].textContent = `  `
 
 	hyper.forEach((hyper, i) => {
 		hyper.href = us[i].href

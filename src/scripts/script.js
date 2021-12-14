@@ -2075,10 +2075,10 @@ function showPopup(data) {
 	function affiche() {
 		const setReviewLink = () =>
 			mobilecheck
-				? 'https://github.com/victrme/Bonjourr/stargazers'
+				? 'https://github.com/allaboutishaan/iPage/stargazers'
 				: navigator.userAgent.includes('Chrome')
-				? 'https://chrome.google.com/webstore/detail/bonjourr-%C2%B7-minimalist-lig/dlnejlppicbjfcfcedcflplfjajinajd/reviews'
-				: 'https://addons.mozilla.org/en-US/firefox/addon/bonjourr-startpage/'
+				? 'https://chrome.google.com/webstore'
+				: navigator.userAgent.includes('Chrome')
 
 		const dom = {
 			wrap: document.createElement('div'),
@@ -2102,11 +2102,11 @@ function showPopup(data) {
 		dom.wrap.id = 'popup'
 		dom.desc.id = 'popup_text'
 		dom.desc.textContent = tradThis(
-			'Love using Bonjourr? Consider giving us a review or donating, that would help a lot! 😇'
+			'Love using iPage? Consider giving us a review or donating, that would help a lot! 😇'
 		)
 
 		dom.review.href = setReviewLink()
-		dom.donate.href = 'https://ko-fi.com/bonjourr'
+		dom.donate.href = 'https://ko-fi.com/allaboutishaan'
 
 		dom.review.textContent = tradThis('Review')
 		dom.donate.textContent = tradThis('Donate')
