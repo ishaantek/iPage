@@ -1,0 +1,216 @@
+@mixin darkCss {
+	#interface {
+		color: #eee;
+	}
+
+	#bookmarks {
+		background-color: #1c1c1e;
+		color: $purewhite;
+	}
+
+	#bookmarks_container,
+	#editlink_container {
+		#bookmarks,
+		#bookmarks h3,
+		#bookmarks .bookmarkOptions,
+		#editlink {
+			background-color: #1c1c1e;
+			color: $purewhite;
+
+			form div,
+			input[type='text'],
+			input[type='url'] {
+				background-color: #39383d;
+				color: $purewhite;
+			}
+
+			#selectedCounter,
+			.empty_input {
+				color: #eee;
+			}
+
+			.empty_input {
+				&:hover {
+					background-color: #666;
+				}
+
+				&:active {
+					color: #ccc;
+					background-color: #555;
+				}
+			}
+		}
+	}
+
+	#showSettings.shown button {
+		background-color: #fff3;
+		&:hover {
+			background-color: #fff5;
+		}
+	}
+
+	#settings {
+		background-color: $pureblack;
+
+		.tooltip {
+			background-color: $greyish;
+		}
+
+		.tooltip,
+		.titleContainer,
+		.tooltiptext {
+			color: #999;
+		}
+
+		.custom_zone {
+			border-color: #3f3f41;
+		}
+
+		// Background custom
+
+		#fileContainer {
+			background-color: #3a3a3a;
+			color: white;
+		}
+
+		#fileContainer.dragover,
+		#fileContainer:hover {
+			border: 1px dashed #ccc;
+			background: #2a2a2b;
+		}
+
+		#fileContainer:active,
+		#fileContainer:active {
+			border: 1px dashed #aaa;
+			background: #2f2f30;
+		}
+
+		#bg_tn_wrap,
+		#hideelem > div {
+			button {
+				color: white;
+				background-color: #3f3f41;
+
+				&.clicked {
+					color: #ccc;
+					background-color: #1c1c1e;
+				}
+			}
+		}
+
+		#hideelem button,
+		#bg_tn_wrap .thumbnail button {
+			color: $purewhite;
+		}
+		#bg_tn_wrap::-webkit-scrollbar-track {
+			background: #39383d;
+		}
+		#bg_tn_wrap::-webkit-scrollbar-thumb {
+			background: #666;
+		}
+
+		.title {
+			background-color: #1c1c1e;
+			color: $purewhite;
+			border-top: 0;
+			border-bottom: 0;
+		}
+
+		#i_refresh,
+		select {
+			color: $purewhite;
+			background-color: $greyish;
+			border-color: transparent;
+		}
+
+		.paramTitle {
+			color: #929294;
+		}
+
+		.param {
+			background-color: #1c1c1e;
+			color: $purewhite;
+		}
+
+		hr {
+			border-bottom: 1px solid #3f3f41;
+		}
+
+		input[type='text'],
+		input[type='url'] {
+			background-color: #39383d;
+			color: $purewhite;
+
+			&:focus {
+				background-color: #2c2c2f;
+				color: white;
+
+				::placeholder {
+					color: #ddd;
+					transition: color 0.2s;
+				}
+			}
+		}
+
+		#cssEditor {
+			color: white;
+			background-color: #1c1c1e;
+		}
+
+		::-moz-range-thumb {
+			box-shadow: none;
+		}
+
+		::placeholder {
+			color: #929294;
+		}
+
+		button {
+			background-color: #1c1c1e;
+		}
+
+		.slider {
+			background-color: #39383d;
+
+			&:hover {
+				background-color: #2c2c2f;
+			}
+		}
+
+		input[type='range']::-webkit-slider-thumb {
+			box-shadow: none;
+		}
+
+		input:checked + .slider {
+			background-color: $green;
+
+			&:hover {
+				background: #40b354;
+				transition: background 0.2s;
+			}
+		}
+
+		.signature {
+			color: #929294;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			box-shadow: inset 0 0 15px 15px #39383d;
+		}
+
+		// &.scroll::-webkit-scrollbar-thumb {
+		// 	box-shadow: inset 0 0 15px 15px #39383d;
+		// }
+	}
+}
+
+// dark mode
+body.dark {
+	@include darkCss();
+}
+
+body.autodark {
+	@media (prefers-color-scheme: dark) {
+		@include darkCss();
+	}
+}

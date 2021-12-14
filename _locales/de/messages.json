@@ -1,0 +1,10 @@
+{
+	"extensionName": {
+		"message": "iPage",
+		"description": "Erweiterungsname"
+	},
+	"extensionDesc": {
+		"message": "Verbessere deine Web-Browsing Erfahrung mit iPage, einer wunderschönen, anpassbaren und leichtgewichtigen Homepage inspiriert von iOS.",
+		"description": "Beschreibung der Erweiterung"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"extensionName": {
+		"message": "iPage",
+		"description": "extension name"
+	},
+	"extensionDesc": {
+		"message": "Browse beter met iPage. Een mooie, aanpasbare en lichte startpagina geïnspireerd door iOS.",
+		"description": "extension description"
+	}
+}

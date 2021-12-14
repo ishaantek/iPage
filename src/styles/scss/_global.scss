@@ -1,0 +1,448 @@
+//
+//
+
+$fonts: -apple-system, system-ui, Ubuntu, Roboto, 'Open Sans', 'Segoe UI', 'Helvetica Neue';
+
+$purewhite: white;
+$pureblack: black;
+
+$blue: #007aff;
+$green: #4bd663;
+$red: #fe3b31;
+$settingsGrey: #f2f2f7;
+$inputGrey: #eaeaee;
+$focusedGrey: #dadade;
+$borderGrey: #c8c7cc;
+$placeholderGrey: #7c7d7e;
+$greyish: #3a3a3a;
+$blackish: #222;
+
+$thumbShadow: 0px 1px 3px 1.5px #cccccc;
+$textShadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+$easeOutThree: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+:root {
+	--app-height: 100vh;
+}
+
+body {
+	margin: 0;
+	cursor: default;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	opacity: 1;
+	background-color: $pureblack;
+	color: $purewhite;
+	font-family: $fonts;
+	font-size: 1em;
+	max-height: var(--app-height);
+	text-align: center;
+	overflow: hidden;
+	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+	p,
+	h3 {
+		margin: 0;
+	}
+
+	hr {
+		border: none;
+		border-bottom: 1px solid $borderGrey;
+		margin: 0.75em 0;
+		display: block;
+	}
+
+	select {
+		cursor: pointer;
+	}
+
+	a,
+	input,
+	textarea,
+	select,
+	button {
+		outline: none;
+	}
+
+	&.tabbing {
+		a:focus,
+		input:focus,
+		textarea:focus,
+		select:focus,
+		button:focus {
+			outline: auto;
+		}
+	}
+}
+
+@mixin animHide() {
+	@keyframes animHide {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+}
+
+@mixin hidden {
+	&.hidden {
+		display: none;
+		cursor: default;
+		opacity: 0;
+		transition: opacity 0.1s;
+	}
+}
+
+@mixin allCentered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin marginSettings {
+	margin-left: 21px;
+	margin-right: 21px;
+}
+
+@mixin radiusSettings {
+	border-radius: 10px;
+}
+
+@mixin frostedGlass($tint: 255, $alpha: 0.4, $blur: 10px, $fbTint: 255, $fbAlpha: 0.8, $fbColor: #222) {
+	@supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
+		backdrop-filter: blur($blur);
+		-webkit-backdrop-filter: blur($blur);
+		background: rgba($tint, $tint, $tint, $alpha);
+	}
+
+	// fb: fallback
+	@supports not ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+		background: rgba($fbTint, $fbTint, $fbTint, $fbAlpha);
+		color: $fbColor;
+	}
+}
+
+@mixin hideElements {
+	#interface {
+		//
+		&.init {
+			#main,
+			#linkblocks,
+			#sb_container,
+			#searchbar,
+			#time,
+			#time-container,
+			#date,
+			#description,
+			#greetings,
+			#widget,
+			#forecast,
+			#current {
+				transition: none;
+			}
+		}
+
+		#main,
+		#time,
+		#sb_container,
+		#linkblocks {
+			flex-grow: 1;
+			transition: transform 0.4s, opacity 0.2s, flex-grow 0.4s 0.2s;
+			will-change: transform, flex-grow;
+		}
+
+		#time-container,
+		#date,
+		#description,
+		#greetings,
+		#widget {
+			transition: opacity 0.4s;
+		}
+
+		// Parent blocks shrinks & hide
+		#main.he_hidden,
+		#linkblocks.he_hidden,
+		#time.he_hidden {
+			flex-grow: 0;
+			opacity: 0;
+		}
+
+		// Children only hide
+		#time-container.he_hidden,
+		#date.he_hidden,
+		#description.he_hidden,
+		#greetings.he_hidden,
+		#widget.he_hidden {
+			opacity: 0;
+		}
+	}
+}
+
+@mixin allSettings {
+	.as {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.4s;
+	}
+
+	/* prettier-ignore */
+	&.all {
+		.as_link {max-height: 120px}
+		.as_collection {max-height: 130px}
+		.as_visuals {max-height: 300px}
+		.as_timedate {max-height: 260px}
+		.as_sbopacity {max-height: 60px}
+		.as_forecast {max-height: 60px}
+		.as_fonts {max-height: 240px}
+		.as_css {max-height: 3100px}
+		.as_impexp {max-height: 220px}
+	}
+
+	&.init {
+		.as {
+			transition: max-height 0s;
+		}
+	}
+}
+
+@mixin settingsBase {
+	//
+	// Dark mode transition
+	// #settings and buttons have seperate transitions
+	#i_refresh,
+	#cssEditor,
+	.tooltip,
+	.param,
+	select,
+	input,
+	hr {
+		transition-duration: 0.6s;
+		transition-timing-function: $easeOutThree;
+		transition-property: background-color, color, border, border-color;
+	}
+
+	#i_refresh,
+	#cssEditor,
+	input[type='text'],
+	input[type='range'],
+	select {
+		font-size: 13px;
+	}
+
+	#i_refresh,
+	select {
+		height: 2.35em;
+		border-radius: 8.5px;
+		padding-left: 10px;
+		border: 1px solid $inputGrey;
+		color: $blackish;
+		-webkit-appearance: none;
+	}
+
+	input[type='text'] {
+		width: 140px;
+	}
+
+	input[type='range'],
+	select {
+		width: 150px;
+	}
+
+	.slider,
+	input:checked + .slider {
+		transition: background-color 0.1s;
+	}
+
+	input:active,
+	input:focus,
+	a:hover,
+	a:active,
+	a:focus {
+		border: 0;
+	}
+
+	input::placeholder {
+		color: $placeholderGrey;
+		opacity: 1;
+	}
+
+	input::-moz-focus-outer {
+		border: 0;
+	}
+
+	input[type='text'],
+	input[type='url'] {
+		padding-left: 10px;
+		border-radius: 8.5px;
+		border: 0;
+		height: 2.35em;
+		color: $blackish;
+		background-color: $inputGrey;
+	}
+
+	input[type='text']:focus,
+	input[type='url']:focus {
+		background-color: $focusedGrey;
+	}
+
+	button {
+		border: 0;
+		background-color: #fff;
+		color: $blue;
+		cursor: pointer;
+		font-size: 14px;
+	}
+
+	/* Switch */
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 56px;
+		height: 34px;
+		margin-left: 1em;
+
+		input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		input:checked + .slider {
+			background-color: $green;
+		}
+
+		input:checked + .slider:before {
+			transform: translateX(22px);
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: $inputGrey;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+			border-radius: 34px;
+
+			&:before {
+				position: absolute;
+				content: '';
+				height: 28px;
+				width: 28px;
+				left: 3px;
+				bottom: 3px;
+				background-color: $purewhite;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+				border-radius: 50%;
+				box-shadow: 0px 1px 4px 1.5px rgba(0, 0, 0, 0.2);
+			}
+
+			&:hover {
+				background: #ccc;
+				transition: background-color 0.2s;
+			}
+		}
+	}
+
+	/* Slider */
+	input[type='range'] {
+		-webkit-appearance: none;
+		position: relative;
+		height: 2px;
+		cursor: pointer;
+		background-color: $focusedGrey;
+		border-radius: 1.5rem;
+		opacity: 1;
+
+		/* Firefox */
+		&::-moz-range-track {
+			height: 2px;
+			border-radius: 50px;
+			background: $focusedGrey;
+		}
+
+		&::-moz-range-progress {
+			background-color: $borderGrey;
+		}
+
+		&::-moz-range-thumb {
+			background: #fff;
+			height: 20px;
+			width: 20px;
+			border-radius: 50px;
+			border: 0;
+
+			box-shadow: $thumbShadow;
+		}
+	}
+
+	/* Chrome, Opera & Safari */
+	input[type='range']::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background: #fff;
+		height: 20px;
+		width: 20px;
+		border-radius: 50px;
+		border: 0;
+		box-shadow: $thumbShadow;
+	}
+
+	input[type='range']::-ms-thumb {
+		margin: 0; /* Resets margin in Edge since it supports -webkit-slider-thumb as well */
+	}
+
+	/*Edge*/
+	&::-ms-fill-lower {
+		background: dodgerblue;
+	}
+
+	&::-ms-thumb {
+		background: #fff;
+		border: 2px solid #999;
+		height: 40px;
+		width: 20px;
+		box-sizing: border-box;
+	}
+
+	&::-ms-ticks-after {
+		display: none;
+	}
+
+	&::-ms-ticks-before {
+		display: none;
+	}
+
+	&::-ms-track {
+		background: #ddd;
+		color: transparent;
+		height: 40px;
+		border: none;
+	}
+
+	&::-ms-tooltip {
+		display: none;
+	}
+
+	/* total width */
+	&::-webkit-scrollbar {
+		width: 15px;
+	}
+
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 15px 15px transparent;
+		border: solid 3px transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		box-shadow: inset 0 0 15px 15px $borderGrey;
+		border: solid 3px transparent;
+		border-radius: 15px;
+	}
+}

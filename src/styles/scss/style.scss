@@ -1,0 +1,879 @@
+@import 'global';
+@include hideElements;
+
+#interface {
+	position: relative;
+	min-height: var(--app-height);
+	min-width: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	will-change: transform;
+	overflow: hidden;
+	transition-property: opacity, transform;
+	text-shadow: 1px 2px 15px rgba(0, 0, 0, 0.2);
+	font-weight: 300;
+
+	&.pushed {
+		#time,
+		#main,
+		#sb_container,
+		#linkblocks {
+			transform: translateX(-100px);
+		}
+	}
+
+	&.init {
+		opacity: 0;
+	}
+
+	#background_overlay {
+		z-index: -1;
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		min-height: 100vh;
+		transform: scale(1.1) translateX(0px);
+
+		opacity: 0;
+		transition: transform 0.4s, opacity 0.4s;
+
+		#background {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+			background-size: cover;
+			background-position: center center;
+
+			// only for Safari
+			@media not all and (min-resolution: 0.001dpcm) {
+				@supports (-webkit-appearance: none) and (stroke-color: transparent) {
+					transform: translateZ(0);
+				}
+			}
+		}
+	}
+
+	// clock & date
+	#time {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+
+		#time-container {
+			#clock {
+				font-size: 6em;
+				font-weight: 200;
+
+				&.hidden {
+					display: none;
+				}
+			}
+
+			#analogClock {
+				border: 0.2em solid white;
+				border-radius: 100%;
+				height: 8em;
+				position: relative;
+				margin: auto auto 2em auto;
+				width: 8em;
+				box-shadow: $textShadow;
+
+				@include frostedGlass($alpha: 0.2, $fbAlpha: 0.2);
+
+				&:hover {
+					background: rgba(255, 255, 255, 0.2);
+				}
+
+				&.hidden {
+					display: none;
+				}
+
+				#center {
+					position: absolute;
+					z-index: 5;
+					width: 0.4em;
+					height: 0.4em;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					background-color: white;
+					border-radius: 100px;
+				}
+
+				.numbers {
+					position: absolute;
+					display: block;
+					opacity: 0.6;
+					width: 100%;
+
+					&.top {
+						top: 10px;
+						text-align: center;
+					}
+
+					&.right {
+						top: 40%;
+						right: 10px;
+						text-align: right;
+					}
+
+					&.bottom {
+						bottom: 10px;
+						text-align: center;
+					}
+
+					&.left {
+						top: 40%;
+						left: 10px;
+						text-align: left;
+					}
+				}
+
+				// aiguilles
+				span {
+					background: white;
+					border-radius: 20px;
+					bottom: 50%;
+					display: block;
+					width: 0.2em;
+					left: 50%;
+					margin-left: -0.1em;
+					position: absolute;
+					transform-origin: bottom center;
+					box-shadow: $textShadow;
+
+					&#hours {
+						height: 30%;
+					}
+
+					&#minutes {
+						height: 45%;
+					}
+
+					&#analogSeconds {
+						height: 45%;
+						width: 0.1em;
+						margin-left: -0.05em;
+						opacity: 0.8;
+						background-color: red;
+
+						&.hidden {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+
+		#date {
+			font-size: 1.5em;
+			position: relative;
+		}
+	}
+
+	// greetings & weather
+	#main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-right: auto;
+		margin-left: auto;
+
+		#greetings {
+			font-size: 3em;
+			font-weight: inherit;
+			min-width: 300px;
+			max-width: 16em;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		#weather {
+			position: relative;
+
+			#description {
+				font-size: 1.5em;
+
+				#forecast {
+					display: none;
+
+					&.shown {
+						display: block;
+					}
+				}
+			}
+
+			#widget {
+				display: flex;
+				height: 5.6em;
+				justify-content: center;
+				align-items: center;
+
+				img {
+					height: 3.6em;
+					width: 3.6em;
+					border: none;
+					padding-right: 10px;
+				}
+
+				p {
+					font-size: 2.2em;
+				}
+			}
+		}
+	}
+
+	#widget,
+	#forecast,
+	#current {
+		transition: opacity 1.2s 0.1s;
+
+		&.wait {
+			opacity: 0;
+		}
+	}
+
+	// search bar
+	#sb_container {
+		position: relative;
+		display: flex;
+		visibility: visible;
+		align-items: center;
+		flex-grow: 0;
+		padding: 0;
+		margin: 0 auto;
+		width: 500px;
+		border-radius: 10px;
+		max-width: calc(90% - 4em);
+		transition: opacity 0.4s, transform 0.4s, margin 0.4s;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+		#searchbar {
+			height: 2.5em;
+			width: 100%;
+			padding: 0 1em;
+			padding-right: calc(3em + 10px);
+			font-size: 1.3em;
+			color: #fff;
+			border: 0;
+			border-radius: 10px;
+			font-family: $fonts;
+			background-color: transparent;
+			transition: background-color 0.2s;
+
+			&:focus {
+				@include frostedGlass($blur: 0, $alpha: 0.2, $fbTint: 255, $fbAlpha: 0.8, $fbColor: #222);
+			}
+
+			&::placeholder {
+				transition: opacity 0.2s;
+				text-transform: none;
+				color: #fff5;
+			}
+		}
+
+		&.shown {
+			margin: 3em auto;
+			@include frostedGlass($alpha: 0.1, $fbAlpha: 0.25);
+
+			#searchbar:focus {
+				opacity: 1;
+			}
+		}
+
+		&.hidden {
+			flex-grow: 0;
+			visibility: hidden;
+		}
+
+		#sb_empty {
+			position: absolute;
+			right: 10px;
+			opacity: 0;
+			border: none;
+			color: #fff;
+			cursor: text;
+			margin-right: 1em;
+			border-radius: 1em;
+			font-size: inherit;
+			background-color: transparent;
+			transition: opacity 0.2s;
+
+			&.shown {
+				opacity: 1;
+				cursor: pointer;
+			}
+		}
+	}
+
+	#linkblocks {
+		visibility: visible;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: flex-start;
+		max-width: 100%;
+		margin: 0 auto;
+		padding-top: 2em;
+
+		@include hidden();
+
+		&.he_hidden {
+			#linkblocks_inner {
+				visibility: hidden;
+				transition: visibility 0s 0.4s;
+			}
+		}
+
+		#linkblocks_inner {
+			width: 56em;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			transition: visibility 0s 0s;
+		}
+
+		.block_parent {
+			cursor: pointer;
+			position: relative;
+			margin: 1em;
+			width: 5em;
+
+			.block {
+				.l_icon_wrap {
+					overflow: hidden;
+					width: 4.6em;
+					height: 4.6em;
+					margin: 0 auto 0.5em auto;
+					position: relative;
+					border-radius: 10px;
+					background: $purewhite;
+					border: 0.2em solid $purewhite;
+					box-shadow: $textShadow;
+					transition: border-color 0.1s, filter 0.1s;
+
+					.l_icon {
+						width: 100%;
+						pointer-events: none;
+					}
+
+					&.selected {
+						border-color: $blue;
+						filter: brightness(0.75);
+					}
+
+					&:hover {
+						border-color: $blue;
+						transition: border-color 0.1s;
+					}
+
+					&:active {
+						filter: brightness(0.75);
+						transition: border-color 0.1s, filter 0.1s;
+					}
+				}
+
+				span {
+					display: block;
+					width: 100%;
+					max-height: 3.3em;
+					line-height: 1.1em;
+					overflow: hidden;
+					word-wrap: break-word;
+					text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+				}
+			}
+
+			button.remove {
+				position: absolute;
+				display: none;
+				top: -1.2em;
+				left: -1.2em;
+				height: 30px;
+				width: 30px;
+				border: 0;
+				border-radius: 100%;
+				background: #ffffff;
+				box-shadow: 0px 1px 10px 1.5px rgba(0, 0, 0, 0.3);
+				z-index: 3;
+				cursor: default;
+				transition: all 0.1s;
+
+				img {
+					height: 0.9em;
+					width: 0.9em;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+
+				&.visible {
+					cursor: pointer;
+				}
+
+				&:hover {
+					background: #bbb;
+				}
+			}
+
+			&.removed {
+				transform: scale(0);
+				overflow: hidden;
+				width: 0;
+				margin: 1em 0;
+				transition: transform 0.6s, width 0.6s 0.1s, margin 0.6s 0.1s;
+			}
+		}
+	}
+
+	// Defunct shadows
+	#weather::before,
+	#date::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 100%;
+		z-index: -1;
+	}
+
+	#date::before {
+		top: -50px;
+		box-shadow: 0px 0px 100px 40px #2224;
+	}
+
+	#weather::before {
+		box-shadow: 0px 0px 150px 40px #2224;
+	}
+}
+
+@keyframes animShow {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+#editlink_container,
+#bookmarks_container {
+	position: fixed;
+	display: none;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0;
+	z-index: 1;
+	transition: transform 0.4s;
+	@include frostedGlass($alpha: 0, $blur: 40px, $fbAlpha: 0.2);
+
+	&.pushed {
+		-webkit-transform: translateX(-160px);
+		transform: translateX(-160px);
+	}
+
+	&.shown {
+		display: inline-flex;
+		animation: animShow 0.4s forwards;
+	}
+
+	&.hiding {
+		@include animHide();
+		animation: animHide 0.4s forwards;
+	}
+
+	button {
+		height: 40px;
+		border: 0px;
+		border-radius: 9px;
+		font-size: 0.9em;
+		padding: 0.6em;
+		cursor: pointer;
+		color: $blue;
+		background-color: transparent;
+		transition: opacity 0.1s ease-in;
+
+		&#e_delete {
+			color: red;
+		}
+
+		&:active,
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:active {
+			opacity: 0.8;
+		}
+	}
+
+	#e_close {
+		display: block;
+		text-align: left;
+		padding: 0;
+		margin-bottom: 1.5em;
+		transition: opacity 0.1s ease-in;
+	}
+}
+
+#editlink_container {
+	#editlink {
+		background: $purewhite;
+		align-self: center;
+		margin: auto;
+		color: #333;
+		width: 300px;
+		padding: 1.5em;
+		border-radius: 10px;
+		z-index: 3;
+
+		> div {
+			position: relative;
+		}
+
+		.empty_input {
+			position: absolute;
+			right: 12px;
+			top: 0.6em;
+			width: 1.5em;
+			height: 1.5em;
+			line-height: 1.5em;
+			border-radius: 100%;
+			color: #444;
+			font-size: 1em;
+			padding: 0;
+			opacity: 0;
+			cursor: text;
+			text-decoration: none;
+			transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+
+			&.shown {
+				opacity: 1;
+				cursor: pointer;
+			}
+
+			&:hover {
+				background-color: #ddd;
+			}
+
+			&:active {
+				background-color: #ccc;
+				color: #222;
+			}
+		}
+
+		input[type='text'],
+		input[type='url'] {
+			border: 0px;
+			height: 1em;
+			width: 100%;
+			font-size: 1em;
+			padding: 1em;
+			box-sizing: border-box;
+			border-radius: 9px;
+			font-size: 0.9em;
+			background-color: $inputGrey;
+			border-radius: 8px;
+			height: 2.35em;
+			margin: 0.3em 0;
+			padding-right: 3em;
+			transition: background-color 0.1s;
+
+			&:focus {
+				background-color: #d3d3d5;
+				transition: background-color 0.1s;
+			}
+		}
+
+		.linkOptions {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			margin-top: 1.5em;
+		}
+	}
+}
+
+#bookmarks_container {
+	z-index: 4;
+
+	#bookmarks {
+		flex-direction: column;
+		background-color: $settingsGrey;
+		padding: 1.5em;
+		border-radius: 10px;
+		overflow: hidden;
+		align-self: center;
+		margin: auto;
+		min-width: 320px;
+
+		#e_close {
+			margin-left: 20px;
+		}
+
+		form {
+			max-height: 70vh;
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			div {
+				display: flex;
+				flex-direction: column;
+				cursor: pointer;
+				overflow: hidden;
+				background-color: white;
+				color: $blackish;
+				padding: 20px;
+				width: 50vw;
+				max-width: 800px;
+				padding-left: 3.5em;
+				text-align: left;
+				word-break: break-all;
+				position: relative;
+				transition: filter 0.1s;
+
+				&:before {
+					content: '';
+					background-color: unset;
+					background-image: unset;
+					border: 2px solid #c5c4c6;
+
+					background-repeat: no-repeat;
+					background-size: 12px;
+					background-position: center;
+					width: 25px;
+					height: 25px;
+					text-align: center;
+					border-radius: 100px;
+					position: absolute;
+					vertical-align: -50%;
+					top: 50%;
+					transform: translateY(-50%);
+					margin-left: -39px;
+					box-sizing: border-box;
+					transition: background-color 0.1s;
+				}
+
+				h5,
+				pre {
+					margin: 0;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
+				}
+
+				pre {
+					margin-top: 10px;
+				}
+
+				&:first-child {
+					padding-top: 20px;
+					border-radius: 10px 10px 0 0;
+				}
+
+				&:last-child {
+					padding-bottom: 20px;
+					border-radius: 0 0 10px 10px;
+				}
+
+				&.selected {
+					filter: brightness(0.9);
+					&:before {
+						border: unset;
+						background-image: url('/src/assets/interface/checkmark.svg');
+						background-color: $blue;
+					}
+				}
+			}
+		}
+
+		.bookmarkOptions {
+			display: flex;
+			justify-content: space-between;
+			background-color: $settingsGrey;
+			margin: 1em 20px 0 20px;
+
+			#applybookmarks {
+				text-align: right;
+				transition: filter 0.4s;
+
+				&.none {
+					cursor: default;
+					filter: grayscale(1);
+					text-decoration: none;
+				}
+			}
+
+			#selectedCounter {
+				color: #6d6d72;
+				display: flex;
+				align-items: center;
+				white-space: pre;
+
+				&.full {
+					// dark mode has priority somehow
+					color: $red !important;
+				}
+			}
+		}
+	}
+}
+
+#credit {
+	position: fixed;
+	bottom: 2rem;
+	left: 2rem;
+	opacity: 0;
+	text-align: left;
+	transition: opacity 0.4s;
+
+	&.shown {
+		opacity: 1;
+	}
+
+	a {
+		font-size: 13px;
+		color: #fff9;
+		text-decoration: none;
+		transition: color 0.1s;
+
+		&:hover {
+			color: #fffe;
+		}
+	}
+}
+
+#popup {
+	display: flex;
+	position: fixed;
+	bottom: 4rem;
+	left: 4rem;
+	z-index: 3;
+	transition: opacity 0.4s;
+
+	#popup_buttons a,
+	#popup_text {
+		opacity: 0;
+		transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+	}
+
+	&.shown {
+		#popup_buttons a,
+		#popup_text {
+			opacity: 1;
+			cursor: pointer;
+			transition: opacity 2s, background-color 0.2s, color 0.2s;
+		}
+	}
+}
+
+#popup_buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 140px;
+
+	a {
+		color: white;
+		text-decoration: none;
+		border-radius: 10px;
+		line-height: 36px;
+
+		@include frostedGlass($alpha: 0.2, $blur: 10px, $fbAlpha: 0.3, $fbColor: white);
+
+		&:hover {
+			@include frostedGlass($alpha: 0.4, $blur: 10px, $fbAlpha: 0.4, $fbColor: white);
+		}
+
+		&:active {
+			@include frostedGlass($alpha: 0.6, $blur: 10px, $fbAlpha: 0.6, $fbColor: white);
+		}
+	}
+}
+
+#popup_text {
+	width: 260px;
+	left: 40px;
+	text-align: left;
+	padding: 10px 30px;
+	margin-right: 10px;
+	border-radius: 10px;
+	justify-content: space-between;
+	@include frostedGlass($alpha: 0.2, $blur: 10px, $fbAlpha: 0.3, $fbColor: white);
+
+	&::before {
+		content: '×';
+		opacity: 0;
+		position: absolute;
+		top: 20px;
+		left: 140px;
+		width: 40px;
+		height: 40px;
+		font-size: 30px;
+		line-height: 35px;
+		border-radius: 5px;
+		color: #fff;
+		text-align: center;
+		transition: opacity 0.4s, filter 0.2s;
+	}
+
+	&:hover {
+		color: transparent;
+		@include frostedGlass($alpha: 0.1, $blur: 10px, $fbAlpha: 0.2, $fbColor: transparent);
+
+		&::before {
+			opacity: 1;
+		}
+	}
+
+	&:active {
+		@include frostedGlass($alpha: 0, $blur: 10px, $fbAlpha: 0.1, $fbColor: transparent);
+
+		&::before {
+			opacity: 1;
+			filter: brightness(0.8);
+		}
+	}
+}
+
+#bonjourrError {
+	height: 80vh;
+	width: 80vw;
+	margin: 0 10vw;
+	opacity: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.4s;
+	color: #ddd;
+
+	pre {
+		white-space: normal;
+		word-break: break-all;
+		user-select: all;
+		cursor: text;
+		max-width: 400px;
+	}
+
+	a {
+		color: #ddd;
+	}
+
+	button {
+		margin: 4em;
+		cursor: pointer;
+	}
+}
+
+@import 'settings';
+@import 'dark';
+@import 'responsive';
