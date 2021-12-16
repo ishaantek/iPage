@@ -1,11 +1,16 @@
 # iPage
 
 <p align="center">
+<<<<<<< HEAD
   <img src="https://raw.githubusercontent.com/victrme/Bonjourr/master/src/assets/bonjourr.png" width="50%"></img>
 </p><br>
 The most powerful homepage for Chrome ⚡
 
 [Get it now - it's free!](https://chrome.google.com/webstore/detail/ipage-%C2%B7-minimalist-lightw/fodhpfjpacekldkejdpkghnkbpjidmcb)
+=======
+  <img src="https://i.ibb.co/JrbPmbF/bonjourr.png" width="50%"></img>
+</p>
+>>>>>>> c878caea6f1104417c12cbb524c2ff7a1793b66a
 
 iPage is a home page for your Internet browser, inspired by the looks of iOS' Bedtime feature.
 
