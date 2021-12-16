@@ -56,7 +56,7 @@ You can run iPage locally without having to install it from the Chrome Store. He
 ## Libraries used
 -   Styled with [Sass](https://sass-lang.com/guide)
 -   Scripts with pure JS
--   Releases bundled with Gulp, [see dependencies](https://github.com/victrme/Bonjourr/network/dependencies)
+-   Releases bundled with Gulp, [see dependencies](https://github.com/allaboutishaan/iPage/network/dependencies)
 
 #
  Feel free to reach out to me through email at ishaan@allaboutishaan.com or [on Twitter](https://twitter.com/allaboutishaan) if you have any questions or feedback! Hope you find this useful 💙
