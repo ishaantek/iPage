@@ -1,16 +1,11 @@
 # iPage
 
 <p align="center">
-<<<<<<< HEAD
   <img src="https://raw.githubusercontent.com/victrme/Bonjourr/master/src/assets/bonjourr.png" width="50%"></img>
 </p><br>
 The most powerful homepage for Chrome ⚡
 
 [Get it now - it's free!](https://chrome.google.com/webstore/detail/ipage-%C2%B7-minimalist-lightw/fodhpfjpacekldkejdpkghnkbpjidmcb)
-=======
-  <img src="https://i.ibb.co/JrbPmbF/bonjourr.png" width="50%"></img>
-</p>
->>>>>>> c878caea6f1104417c12cbb524c2ff7a1793b66a
 
 iPage is a home page for your Internet browser, inspired by the looks of iOS' Bedtime feature.
 
@@ -27,12 +22,12 @@ Made by [Ishaan Garg](https://twitter.com/allaboutishaan)
   - [Libraries used](#libraries-used)
 
 ## Features
-💎 Beautiful, minimal design
-✨ Highly customizable
-☁️ Weather based on your location
-🔗 Quick links to your favorite websites
-⚡ Fast & smooth
-🌑 Dark mode
+💎 Beautiful, minimal design<br>
+✨ Highly customizable<br>
+☁️ Weather based on your location<br>
+🔗 Quick links to your favorite websites<br>
+⚡ Fast & smooth<br>
+🌑 Dark mode<br>
 ...and much more - all for free & no sign in needed!<br>
 
 ## Translating iPage to other languages
