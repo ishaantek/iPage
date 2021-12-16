@@ -45,15 +45,13 @@ You can run iPage locally without having to install it from the Chrome Store. He
 
 1. Download the code. In the web version of GitHub, you can do that by clicking the green "Code" button, and then "Download ZIP".
 2. Go to chrome://extensions/ in your browser, and [enable developer mode](https://developer.chrome.com/docs/extensions/mv2/faq/#:~:text=You%20can%20start%20by%20turning,a%20packaged%20extension%2C%20and%20more.).
-3. Drag the folder that contains the code (make sure it's a folder and not a ZIP file, so unzip first), or click on the "Load unpacked" button and locate the folder.
-4. Run the following commands:
+3. Run the following commands:
 -   `npm install`
 -   `npm run scss` to watch sass files
 -   `npm run chrome` in another terminal to build and watch script changes
--   Go to chrome://extension, enable dev mode
--   Load unpacked extension, select /release folder
 -   Or `npm run online` for standalone version. Needs live server for settings to work
-6. That's it, you will now be able to use iPage locally. Make sure you pin it on the toolbar by clicking the "puzzle" icon in the toolbar and pinning iPage.
+4. Drag the folder that contains the code (make sure it's a folder and not a ZIP file, so unzip first), or click on the "Load unpacked" button and locate the folder.
+5. That's it, you will now be able to use iPage locally. Make sure you pin it on the toolbar by clicking the "puzzle" icon in the toolbar and pinning iPage.
 
 ## Libraries used
 -   Styled with [Sass](https://sass-lang.com/guide)
