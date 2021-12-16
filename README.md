@@ -24,7 +24,7 @@ Made by [Ishaan Garg](https://twitter.com/allaboutishaan)
 ## Features
 💎 Beautiful, minimal design<br>
 ✨ Highly customizable<br>
-☁️ Weather based on your location<br>
+🌦️ Weather based on your location<br>
 🔗 Quick links to your favorite websites<br>
 ⚡ Fast & smooth<br>
 🌑 Dark mode<br>
