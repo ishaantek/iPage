@@ -1,7 +1,7 @@
 # iPage
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/victrme/Bonjourr/master/src/assets/bonjourr.png" width="50%"></img>
+  <img src="https://i.ibb.co/ncMLK5q/bonjourr.png" width="50%"></img>
 </p><br>
 The most powerful homepage for Chrome ⚡
 
