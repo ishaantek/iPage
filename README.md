@@ -9,7 +9,7 @@ The most powerful homepage for Chrome ⚡
 
 iPage is a home page for your Internet browser, inspired by the looks of iOS' Bedtime feature.
 
-Made by [Ishaan Garg](https://twitter.com/allaboutishaan)
+Made by [Ishaan Garg](https://twitter.com/ishaantek)
 
 <a href="https://www.producthunt.com/posts/ipage?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ipage" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=323194&theme=dark" alt="iPage - Minimalist & Lightweight Startpage | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
@@ -34,8 +34,8 @@ Made by [Ishaan Garg](https://twitter.com/allaboutishaan)
 If you'd like to translate iPage to a new language, here's what you should do:
 
 1. Make sure the language you want to translate Screensy into is supported by the Chrome Store. [Here's a list](https://developer.chrome.com/docs/webstore/i18n/#choosing-locales-to-support) of all the supported locales.
-2. Create a new folder under [_locales](https://github.com/allaboutishaan/iPage/tree/master/_locales) with the [locale name for your language](https://developer.chrome.com/docs/webstore/i18n/#choosing-locales-to-support).
-3. Make a copy of [this file](https://github.com/allaboutishaan/ipage/blob/master/_locales/en/messages.json) and translate the "message". The "description" shouldn't be translated, it's only there to give you some context where the string will show in the extension.
+2. Create a new folder under [_locales](https://github.com/ishaantek/iPage/tree/master/_locales) with the [locale name for your language](https://developer.chrome.com/docs/webstore/i18n/#choosing-locales-to-support).
+3. Make a copy of [this file](https://github.com/ishaantek/ipage/blob/master/_locales/en/messages.json) and translate the "message". The "description" shouldn't be translated, it's only there to give you some context where the string will show in the extension.
 4. Translate the [Chrome Store description](https://chrome.google.com/webstore/detail/ipage-%C2%B7-minimalist-lightw/fodhpfjpacekldkejdpkghnkbpjidmcb) so it can be published there, you can simply make a comment with it when you make a pull request. 
 
 Before submitting the pull request, it would be helpful if you tried running the extension in the new language, to make sure everything looks right.
@@ -56,7 +56,7 @@ You can run iPage locally without having to install it from the Chrome Store. He
 ## Libraries used
 -   Styled with [Sass](https://sass-lang.com/guide)
 -   Scripts with pure JS
--   Releases bundled with Gulp, [see dependencies](https://github.com/allaboutishaan/iPage/network/dependencies)
+-   Releases bundled with Gulp, [see dependencies](https://github.com/ishaantek/iPage/network/dependencies)
 
 #
- Feel free to reach out to me through email at ishaan@allaboutishaan.com or [on Twitter](https://twitter.com/allaboutishaan) if you have any questions or feedback! Hope you find this useful 💙
+ Feel free to reach out to me through email at ishaan@ishaantek.com or [on Twitter](https://twitter.com/ishaantek) if you have any questions or feedback! Hope you find this useful 💙
